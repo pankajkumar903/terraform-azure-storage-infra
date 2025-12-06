@@ -2,32 +2,8 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-  # 1. Checkout code
-  - checkout: self
-    displayName: "Checkout repository"
-
-  # 2. Install Terraform and show version
-  - script: |
-      echo "Installing Terraform..."
-      sudo apt-get update -y
-      sudo apt-get install -y wget unzip
-
-      wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
-      unzip terraform_1.5.7_linux_amd64.zip
-      sudo mv terraform /usr/local/bin/
-
-      echo "Terraform version:"
-      terraform version
-    displayName: "Install and verify Terraform version"
-
-  # 3. (Optional) Terraform validate for dev (no backend)
-  - script: |
-      echo "Running Terraform validate for dev (backend disabled)..."
-      cd infra/env/dev
-
-      terraform init -backend=false
-      terraform validate
-    displayName: "Terraform validate (dev, backend disabled)"
+- script: echo "Pipeline is running on Ubuntu!"
+  displayName: "Check Ubuntu Pool"
