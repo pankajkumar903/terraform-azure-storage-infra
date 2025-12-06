@@ -115,13 +115,6 @@ terraform apply -var-file="prod.tfvars"
 
 ---
 
-## 🤝 Contributing
-
-PRs, issues, and suggestions are welcome!
-This project is designed to be easily extendable for any Azure workloads.
-
----
-
 ## 🧑‍💻 Author
 
 **Pankaj Kumar**
