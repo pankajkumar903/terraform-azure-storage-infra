@@ -1,0 +1,31 @@
+variable "resource_group_name" {
+type = string
+}
+
+variable "location" {
+type = string
+}
+
+variable "storage_account_name" {
+type = string
+}
+
+variable "storage_container_name" {
+type = string
+}
+
+variable "file_share_name" {
+type = string
+}
+
+variable "table_name" {
+type = string
+}
+
+variable "queue_name" {
+type = string
+}
+
+variable "tags" {
+type = map(string)
+}
