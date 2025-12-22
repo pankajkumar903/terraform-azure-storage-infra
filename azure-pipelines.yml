@@ -9,7 +9,7 @@ pr:
       - main
 
 pool:
- vmImage: 'macos-latest'
+ vmImage: 'windows-latest'
 stages:
 - stage: Build
   displayName: 'Build Stage (CI / PR Triggered)'
