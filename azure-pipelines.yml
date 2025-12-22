@@ -1,23 +1,35 @@
 trigger:
-  branches:
-    include:
-      - main
-
-pr:
-  branches:
-    include:
-      - main
+ branches:
+   include:
+     - main
 
 pool:
- vmImage: 'windows-latest'
-stages:
-- stage: Build
-  displayName: 'Build Stage (CI / PR Triggered)'
+  vmImage: ubuntu-latest
 
-  jobs:
-  - job: BuildJob
-    displayName: 'Build Job'
-    
-    steps:
-    - script: echo "Pipeline triggered by CI or PR"
-      displayName: 'Run Build'
+steps:
+  # Step 1: Checkout code from GitHub (open/public repo)
+  - checkout: self
+
+  # Step 2: Install Node.js
+  - task: NodeTool@0
+    displayName: 'Install Node.js'
+    inputs:
+      versionSpec: '18.x'
+
+  # Step 3: Install dependencies
+  - script: |
+      npm install
+    displayName: 'Install npm dependencies'
+
+  # Step 4: Build the application
+  - script: |
+      npm run build
+    displayName: 'Build application'
+
+  # Step 5: Publish build output as Artifact
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'dist'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
+    displayName: 'Publish build artifact'
