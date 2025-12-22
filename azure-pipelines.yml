@@ -1,9 +1,24 @@
 trigger:
-- main
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo "Pipeline is running on Ubuntu!"
-  displayName: "Check Ubuntu Pool"
+stages:
+- stage: Build
+  displayName: 'Build Stage (CI / PR Triggered)'
+
+  jobs:
+  - job: BuildJob
+    displayName: 'Build Job'
+    
+    steps:
+    - script: echo "Pipeline triggered by CI or PR"
+      displayName: 'Run Build'
