@@ -7,29 +7,26 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  # Step 1: Checkout code from GitHub (open/public repo)
   - checkout: self
 
-  # Step 2: Install Node.js
   - task: NodeTool@0
-    displayName: 'Install Node.js'
     inputs:
       versionSpec: '18.x'
+    displayName: 'Install Node.js'
 
-  # Step 3: Install dependencies
   - script: |
       npm install
+    workingDirectory: frontend
     displayName: 'Install npm dependencies'
 
-  # Step 4: Build the application
   - script: |
       npm run build
+    workingDirectory: frontend
     displayName: 'Build application'
 
-  # Step 5: Publish build output as Artifact
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: 'dist'
+      PathtoPublish: 'frontend/dist'
       ArtifactName: 'drop'
       publishLocation: 'Container'
     displayName: 'Publish build artifact'
