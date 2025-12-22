@@ -8,9 +8,6 @@ pr:
     include:
       - main
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 stages:
 - stage: Build
   displayName: 'Build Stage (CI / PR Triggered)'
